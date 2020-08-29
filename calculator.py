@@ -24,7 +24,7 @@ def calculate():
             else:
                 continue
 
-    # If the user presses Ctrl-C, end the script
+    # Extremely basic error handling
     except ZeroDivisionError or ValueError:
         print("Zero Division Error or Value Error")
     except:
