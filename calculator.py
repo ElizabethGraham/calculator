@@ -2,7 +2,7 @@ import operator
 
 # Dictionary of arithmetic operators and their respective functions
 ops = {'+': operator.add, '-': operator.sub, '*': operator.mul,
-       '/': operator.truediv, '%': operator.mod, '^': operator.xor}
+       '/': operator.truediv, '%': operator.mod, '^': operator.pow}
 
 print("Calculator Program")
 print("Use numerical characters and +, -, *, /, %, ^ operators.")
