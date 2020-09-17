@@ -4,31 +4,23 @@ import operator
 ops = {'+': operator.add, '-': operator.sub, '*': operator.mul,
        '/': operator.truediv, '%': operator.mod, '^': operator.pow}
 
-print("Calculator Program")
-print("Use numerical characters and +, -, *, /, %, ^ operators.")
 
-
-def calculate():
+def calculate(first_num: int, sec_num: int, user_op):
+    """
+    :param first_num: First numerical parameter
+    :param sec_num: Second numerical parameter
+    :param user_op: The user selected operation to be performed
+    :return: Final calculation
+    """
     try:
-        while True:
-            first_num = int(input("First Number: "))
-            user_op = input("Operation: ")
-            sec_num = int(input("Second Number: "))
-
+        if user_op in ops:
             # print the result of user selected operation of (1st number and 2nd number)
-            print(ops[user_op](first_num, sec_num))
-
-            again = input("Would you like to do another calculation? Press any key to continue or 'n' to quit")
-            if again.lower() == 'n':
-                break
-            else:
-                continue
+            return ops[user_op](first_num, sec_num)
+        else:
+            raise Exception(f'{user_op} is not a valid operation.')
 
     # Extremely basic error handling
     except ZeroDivisionError or ValueError:
         print("Zero Division Error or Value Error")
     except:
-        print("stop testing me")
-
-
-calculate()
+        print("Something went wrong :(")

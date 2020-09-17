@@ -1,56 +1,67 @@
-import pygame
-import sys
+from tkinter import *
+import calculator
 
-pygame.init()
-
-white = (255, 255, 255)  # Window background color
-medium_grey = (170, 170, 170)
-dark_grey = (100, 100, 100)
-width, height = 400, 600  # Window dimensions
-
-screen = pygame.display.set_mode((width, height))  # Initialize screen
-screen.fill(white)  # Fill the background layer with white
-pygame.display.set_caption("Calculator")  # Set the title of the window
-pygame.display.flip()
-
-# Width and height as variables
-width = screen.get_width()
-height = screen.get_height()
-
-user_font = pygame.font.SysFont('Corbel', 35)  # Set font
-text = user_font.render('quit', True, white)
+HEIGHT = 500  # Height variable
+WIDTH = 350  # Width variable
+BUTTON_HEIGHT = 2  # Standard button height
+BUTTON_WIDTH = 2  # Standard button width
+PAD_X = 5  # Standard padding
+PAD_Y = 5
 
 
-def create_buttons():
-    # setting up a 3 * 3 board in canvas
-    board = [[None] * 3, [None] * 3, [None] * 3]
+def setup():
+    """
+    Set up and initialize window elements.
+    Number, operation, and function buttons (20 total at base)
+    """
+    window = Tk()  # Declare the window
+    window.title("Calculator")  # Set window title
+    window.configure(width=WIDTH, height=HEIGHT)  # Set window width and height
+    window.configure(bg='lightgray')  # Set window background color
+    calculation = StringVar() # Hold the calculation in this variable
+
+    keys = ['CE', 'C', '<=', '/',  # List of the keys to be displayed / Associated functions
+            '7', '8', '9', '*',
+            '4', '5', '6', '-',
+            '1', '2', '3', '+',
+            '+-', '0', '.', '=']
+
+    i = 0  # Iterator for the key list
+
+# For every row and column coordinate, place the proper keys[i] button
+    for row in range(5):  # 5 rows
+        for col in range(4):  # 4 columns
+            # Button will use var 'i' to select the text,
+            # and the standard button width and height vars
+            button = Button(text='%s' % (keys[i]),
+                            width=BUTTON_WIDTH,
+                            height=BUTTON_HEIGHT)
+            # Place the button at the proper row (+2 to account for expression_field) and col in the grid
+            button.grid(row=row+2, column=col)
+            i += 1  # Iterate through keys[] dict
+
+        # Entry box that will show the equation in real-time
+        expression_field = Entry(window, textvariable=calculation)
+        expression_field.grid(row=0, columnspan=4, rowspan=2)
+
+    window.mainloop()  # Main loop
 
 
-running = True
-while running:
-    for event in pygame.event.get():
-        # If the user quits, end the while loop
-        if event.type == pygame.QUIT:
-            running = False
-            pygame.quit()
+def clear_entry():
+    """
+    Clear the last user entry -- not a total reset!
+    """
 
-        mouse = pygame.mouse.get_pos()
+    pass
 
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if width / 2 <= mouse[0] <= width / 2 + 140 and height / 2 <= mouse[1] <= height / 2 + 40:
-                pygame.quit()
 
-        """
-        # If mouse is hovered on a button it
-        # changes to lighter shade
-        if width / 2 <= mouse[0] <= width / 2 + 140 and height / 2 <= mouse[1] <= height / 2 + 40:
-            pygame.draw.rect(screen, medium_grey, [width / 2, height / 2, 140, 40])
-        else:
-            pygame.draw.rect(screen, dark_grey, [width / 2, height / 2, 140, 40])
+def clear():
+    """
+    Global calculation clear
+    """
 
-        # superimposing the text onto our button
-        screen.blit(text, (width / 2 + 50, height / 2))
-        """
-        # updates the frames of the game
-        pygame.display.update()
-        pygame.display.flip()
+    pass
+
+
+if __name__ == '__main__':
+    setup()
