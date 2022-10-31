@@ -9,7 +9,7 @@ PAD_X = 5  # Standard padding
 PAD_Y = 5
 
 
-def setup():
+def main():
     """
     Set up and initialize window elements.
     Number, operation, and function buttons (20 total at base)
@@ -20,7 +20,8 @@ def setup():
     window.configure(bg='lightgray')  # Set window background color
     calculation = StringVar() # Hold the calculation in this variable
 
-    keys = ['CE', 'C', '<=', '/',  # List of the keys to be displayed / Associated functions
+    # List of the keys to be displayed / Associated functions
+    keys = ['CE', 'C', '<=', '/',
             '7', '8', '9', '*',
             '4', '5', '6', '-',
             '1', '2', '3', '+',
@@ -28,7 +29,7 @@ def setup():
 
     i = 0  # Iterator for the key list
 
-# For every row and column coordinate, place the proper keys[i] button
+    # For every row and column coordinate, place the proper keys[i] button
     for row in range(5):  # 5 rows
         for col in range(4):  # 4 columns
             # Button will use var 'i' to select the text,
@@ -64,4 +65,4 @@ def clear():
 
 
 if __name__ == '__main__':
-    setup()
+    main()
